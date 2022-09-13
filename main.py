@@ -8,7 +8,7 @@ if __name__ == '__main__':
     print(stl)
 
     stl.triangles.append(
-        Triangles(Vec3(0, 0, 1), [Vec3(10, -5, 0), Vec3(-10, -5, 0), Vec3(0, 5, 0)], 1)
+        Triangles(Vec3(0, 0, 1), [Vec3(10, -5, 0), Vec3(0, 5, 0), Vec3(-10, -5, 0)], 1)
     )
 
     stl.write("model.edit.stl")
