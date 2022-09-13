@@ -7,7 +7,7 @@ int main(int args, const char ** argv){
 
     stl_print(*model);
 
-    stl_save("model.stl", model);
+    stl_save("model.edit.stl", model);
     
     stl_free(model);
     return 0;
