@@ -1,2 +1,6 @@
 .vscode
 __pycache__
+c/mode.edit.stl
+cpp/mode.edit.stl
+js/mode.edit.stl
+python/mode.edit.stl
