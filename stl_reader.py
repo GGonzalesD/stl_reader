@@ -26,14 +26,14 @@ class Triangles:
     def read(cls, file: BufferedReader):
         normal = Vec3.read(file)
         vertex = [ Vec3.read(file) for _ in range(3) ]
-        attrib = int.from_bytes(file.read(2), "little", signed=False)
+        (attrib,) = struct.unpack('H', file.read(2))
         return Triangles(normal, vertex, attrib)
     
     def write(self, file: BufferedWriter):
         self.normal.write(file)
         for vertex in self.vertex:
             vertex.write(file)
-        file.write(self.attrib.to_bytes(2, 'little', signed=False))
+        file.write(struct.pack('H', self.attrib))
 
 @dataclass
 class Stl:
@@ -45,8 +45,7 @@ class Stl:
 
         with open(filename, "rb") as f:
             string = f.read(80).decode()
-            numbers = int.from_bytes(f.read(4), 'little', signed=False)
-
+            (numbers,) = struct.unpack('I', f.read(4))
             triangles = [ Triangles.read(f) for _ in range(numbers) ]
 
         return Stl(string, triangles)
@@ -57,8 +56,7 @@ class Stl:
             header_bytes = self.header[:80].encode()
             header_bytes = header_bytes + b'\x00' * (80 - len(header_bytes))
             f.write(header_bytes)
-            numbers_bytes = len(self.triangles).to_bytes(4, 'little', signed=False)
-            f.write(numbers_bytes)
+            f.write(struct.pack('I', len(self.triangles)))
             for triangle in self.triangles:
                 triangle.write(f)
     
