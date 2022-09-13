@@ -17,7 +17,7 @@ class Vec3:
         file.write(struct.pack("fff", self.x, self.y, self.z))
 
 @dataclass
-class Triangles:
+class Triangle:
     normal: Vec3
     vertex: list[Vec3]
     attrib: int
@@ -27,7 +27,7 @@ class Triangles:
         normal = Vec3.read(file)
         vertex = [ Vec3.read(file) for _ in range(3) ]
         (attrib,) = struct.unpack('H', file.read(2))
-        return Triangles(normal, vertex, attrib)
+        return Triangle(normal, vertex, attrib)
     
     def write(self, file: BufferedWriter):
         self.normal.write(file)
@@ -38,7 +38,7 @@ class Triangles:
 @dataclass
 class Stl:
     header: str
-    triangles: list[Triangles]
+    triangles: list[Triangle]
 
     @classmethod
     def read(cls, filename: str):
@@ -46,7 +46,7 @@ class Stl:
         with open(filename, "rb") as f:
             string = f.read(80).decode()
             (numbers,) = struct.unpack('I', f.read(4))
-            triangles = [ Triangles.read(f) for _ in range(numbers) ]
+            triangles = [ Triangle.read(f) for _ in range(numbers) ]
 
         return Stl(string, triangles)
     

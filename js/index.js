@@ -2,15 +2,11 @@
 import { save, load } from "./stl.js";
 
 (()=>{
-    
-    const filename = "model.stl"
-    const fileout = "model.edit.stl"
 
-    const model = load(filename)
+    const model = load("model.stl")
 
-    //model.header = "Grober"
+    console.log(model)
 
-    save(fileout, model)
-    
+    save("model.edit.stl", model)
 
 })();
