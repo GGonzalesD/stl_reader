@@ -18,7 +18,7 @@ TRIANGLE {
 };
 
 MODEL {
-    char header[81];
+    unsigned char header[81];
     unsigned int size;
     struct Triangle * triangles;
 };
