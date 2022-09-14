@@ -1,13 +1,17 @@
 #!/usr/bin/python3
 from dataclasses import dataclass
 from io import BufferedReader, BufferedWriter
-import struct
+import sys, struct, numpy as np
 
 @dataclass
 class Vec3:
     x: float
     y: float
     z: float
+
+    @property
+    def array(self):
+        return np.array([self.x, self.y, self.z])
 
     @classmethod
     def read(cls, file: BufferedReader):
@@ -21,6 +25,12 @@ class Triangle:
     normal: Vec3
     vertex: list[Vec3]
     attrib: int
+
+    @classmethod
+    def generate_from_vectors(cls, v1:Vec3, v2:Vec3, v3:Vec3, attrib:int=0):
+        normal = np.cross(v2.array - v1.array, v3.array - v1.array)
+        normal = Vec3(*(normal / np.linalg.norm(normal)))
+        return Triangle(normal, [v1, v2, v3], attrib)
 
     @classmethod
     def read(cls, file: BufferedReader):
@@ -39,6 +49,13 @@ class Triangle:
 class Stl:
     header: str
     triangles: list[Triangle]
+
+    def add_triangle(self, v1:Vec3, v2:Vec3, v3:Vec3, attrib:int=0):
+        self.triangles.append( Triangle.generate_from_vectors(v1, v2, v3, attrib) )
+
+    @classmethod
+    def generate_empty(cls):
+        return Stl("Python " + sys.version, [])
 
     @classmethod
     def read(cls, filename: str):
