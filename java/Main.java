@@ -10,10 +10,6 @@ public class Main{
 
             System.out.println(stl);
 
-            for(int i=0; i<stl.getTriangles().size(); i++){
-                System.out.println(stl.getTriangles().get(i));
-            }
-
             stl.write("model.edit.stl");
         }catch(FileNotFoundException e){
             e.printStackTrace(System.err);

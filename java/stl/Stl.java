@@ -1,10 +1,12 @@
 package stl;
 
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Vector;
 
@@ -35,7 +37,6 @@ public class Stl {
             for(int i=0; i<size; i++){
                 triangles.add(Triangle.read(input));
             }
-
             input.close();
         }catch(IOException e){
             e.printStackTrace(System.err);
@@ -44,8 +45,31 @@ public class Stl {
         return new Stl(header, triangles);
     }
 
-    public void write(String filename){
+    public void write(String filename) throws FileNotFoundException {
+        OutputStream output = new FileOutputStream(filename);
+
+        try{
+            byte headerBytes[] = header.getBytes();
+
+            if(headerBytes.length > 80){
+                output.write(headerBytes, 0, 80);
+            } else {
+                output.write(headerBytes);
+                byte gbytes[] = new byte[80 - headerBytes.length];
+                output.write(gbytes);
+            }
+
+            int size = triangles.size();
+            output.write(ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putInt(size).array());
         
+            for(Triangle triangle: triangles){
+                triangle.write(output);
+            }
+
+            output.close();
+        }catch(IOException e){
+            e.printStackTrace(System.err);
+        }
     }
 
     public String getHeader(){

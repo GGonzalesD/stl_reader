@@ -46,7 +46,7 @@ public class Triangle {
             vec3.write(output);
         }
         try{
-            output.write(ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN).putFloat(attrib).array());
+            output.write(ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN).putShort((short)attrib).array());
         }catch(IOException e){
             e.printStackTrace(System.err);
         }
