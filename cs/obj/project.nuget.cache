@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "XUOS0N42AqN+CepCarC9JbD7w00iuxCXRHwG9Pg4U45iiaFo7J1ShEGqe+LLXFCUGHHJuMibV2oAvAxXWg+qeg==",
+  "success": true,
+  "projectFilePath": "/home/poggers/Dev/c/stl_reader/cs/cs.csproj",
+  "expectedPackageFiles": [
+    "/home/poggers/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.8/microsoft.aspnetcore.app.ref.6.0.8.nupkg.sha512"
+  ],
+  "logs": []
+}
