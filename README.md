@@ -48,3 +48,25 @@ console.log(model)
 
 save("model.edit.stl", model)
 ```
+---
+## Stl Reader en Java
+```java
+try{
+    Stl stl = Stl.read("model.stl");
+
+    System.out.println(stl);
+
+    stl.write("model.edit.stl");
+}catch(FileNotFoundException e){
+    e.printStackTrace(System.err);
+}
+```
+---
+## Stl Reader en C#
+```c#
+var stl = Stl.Read("model.stl");
+
+Console.WriteLine(stl);
+
+stl.Write("model.edit.stl");
+```
