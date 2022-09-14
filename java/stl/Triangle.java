@@ -22,7 +22,7 @@ public class Triangle {
         attrib = attrib_;
     }
 
-    public static Triangle read(InputStream input){
+    public static Triangle read(InputStream input) throws IOException{
         byte bytes[] = new byte[4];
         int attrib = 0;
 
@@ -30,26 +30,20 @@ public class Triangle {
         Vec3 v1 = Vec3.read(input);
         Vec3 v2 = Vec3.read(input);
         Vec3 v3 = Vec3.read(input);
-        try{
-            input.read(bytes, 0, 2);
-            attrib = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN).getInt();
-        }catch(IOException e){
-            e.printStackTrace(System.err);
-        }
+        
+        input.read(bytes, 0, 2);
+        attrib = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN).getInt();
 
         return new Triangle(normal, v1, v2, v3, attrib);
     }
 
-    public void write(OutputStream output){
+    public void write(OutputStream output) throws IOException{
         normal.write(output);
         for (Vec3 vec3 : vertex) {
             vec3.write(output);
         }
-        try{
-            output.write(ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN).putShort((short)attrib).array());
-        }catch(IOException e){
-            e.printStackTrace(System.err);
-        }
+        
+        output.write(ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN).putShort((short)attrib).array());
     }
 
     @Override

@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import stl.Stl;
 
@@ -12,6 +13,8 @@ public class Main{
 
             stl.write("model.edit.stl");
         }catch(FileNotFoundException e){
+            e.printStackTrace(System.err);
+        }catch(IOException e){
             e.printStackTrace(System.err);
         }
 

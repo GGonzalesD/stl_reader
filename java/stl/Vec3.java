@@ -15,38 +15,30 @@ public class Vec3 {
         z = z_;
     }
 
-    public static Vec3 read(InputStream input){
+    public static Vec3 read(InputStream input) throws IOException{
         float x = 0, y = 0, z = 0;
         byte bytes[] = new byte[4];
         ByteBuffer buffer;
-        try{
-            input.read(bytes);
-            buffer = ByteBuffer.wrap(bytes);
-            x = buffer.order(ByteOrder.LITTLE_ENDIAN).getFloat();
-            input.read(bytes);
-            buffer = ByteBuffer.wrap(bytes);
-            y = buffer.order(ByteOrder.LITTLE_ENDIAN).getFloat();
-            input.read(bytes);
-            buffer = ByteBuffer.wrap(bytes);
-            z = buffer.order(ByteOrder.LITTLE_ENDIAN).getFloat();
-        }catch(IOException e){
-            e.printStackTrace(System.err);
-        }
+        input.read(bytes);
+        buffer = ByteBuffer.wrap(bytes);
+        x = buffer.order(ByteOrder.LITTLE_ENDIAN).getFloat();
+        input.read(bytes);
+        buffer = ByteBuffer.wrap(bytes);
+        y = buffer.order(ByteOrder.LITTLE_ENDIAN).getFloat();
+        input.read(bytes);
+        buffer = ByteBuffer.wrap(bytes);
+        z = buffer.order(ByteOrder.LITTLE_ENDIAN).getFloat();
         return new Vec3(x, y, z);
     }
 
-    public void write(OutputStream output){
+    public void write(OutputStream output) throws IOException{
         byte bytes[];
-        try{
-            bytes = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putFloat(x).array();
-            output.write(bytes);
-            bytes = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putFloat(y).array();
-            output.write(bytes);
-            bytes = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putFloat(z).array();
-            output.write(bytes);
-        }catch(IOException e){
-            e.printStackTrace(System.err);
-        }
+        bytes = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putFloat(x).array();
+        output.write(bytes);
+        bytes = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putFloat(y).array();
+        output.write(bytes);
+        bytes = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putFloat(z).array();
+        output.write(bytes);
     }
 
     public void setX(float x_){
