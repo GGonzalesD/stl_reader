@@ -1,6 +1,6 @@
 # Stl Reader
 
-Writing and Reading  `.stl` files in different languages.
+Writing and Reading `STL files` in different languages.
 
 ---
 ## Stl Reader in C
