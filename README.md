@@ -1,9 +1,9 @@
 # Stl Reader
 
-Leactura y escritura de archivos `.stl` en diferentes lenguages.
+Writing and Reading  `.stl` files in different languages.
 
 ---
-## Stl Reader en C
+## Stl Reader in C
 ```c
 #include "stl_reader.h"
 
@@ -16,7 +16,7 @@ stl_save("model.edit.stl", model);
 stl_free(model);
 ```
 ---
-## Stl Reader en C++
+## Stl Reader in C++
 ```cpp
 #include "stl_reader.hpp"
 
@@ -27,7 +27,7 @@ std::cout << model << std::endl;
 model.write("model.edit.stl");
 ```
 ---
-## Stl Reader en Python
+## Stl Reader in Python
 ```python
 from stl_reader import Stl
 
@@ -38,7 +38,7 @@ print(stl)
 stl.write("model.edit.stl")
 ```
 ---
-## Stl Reader en Javascript
+## Stl Reader in Javascript
 ```js
 import { save, load } from "./stl.js";
 
@@ -49,7 +49,7 @@ console.log(model)
 save("model.edit.stl", model)
 ```
 ---
-## Stl Reader en Java
+## Stl Reader in Java
 ```java
 try{
     Stl stl = Stl.read("model.stl");
@@ -62,7 +62,7 @@ try{
 }
 ```
 ---
-## Stl Reader en C#
+## Stl Reader in C#
 ```c#
 var stl = Stl.Read("model.stl");
 
